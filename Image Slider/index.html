@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Image Slider</title>
+</head>
+<body>
+
+    <style>
+        body{
+            display:grid;
+            justify-content: center;
+            margin:50px;
+            background:rgb(22, 22, 22);
+        }
+
+        #buttons{
+            display:flex;
+            justify-content: space-between;
+        }
+
+        button{
+            background-image: linear-gradient(lightblue, darkblue);
+            border-radius: 60%;
+            border: #7eb9d200;
+            font-weight: bold;
+            padding:10px;
+            margin:6px;
+            cursor:pointer;
+        }
+    </style>
+
+   <div>
+    <img id="slider" src="image1.jpg" width="700px" height="400px" />
+    <div id="buttons">
+        <button onclick="prev()"> < </button>
+        <button onclick="next()"> > </button>
+    </div>
+   </div> 
+
+   <script>
+    var images = [
+    "image1.jpg", 
+    "image2.jpg", 
+    "image3.jpg"
+    ];
+    var num =0;
+    function next(){
+        var slider = document.getElementById("slider");
+        num++;
+        if(num >= images.length){
+            num = 0;
+        }
+        slider.src = images[num];
+    }
+
+    function prev(){
+        var slider = document.getElementById("slider");
+        num--;
+        if(num <= 0){
+            num = (images.length)-1;
+        }
+        slider.src = images[num];
+    }
+
+   </script>
+</body>
+</html>
