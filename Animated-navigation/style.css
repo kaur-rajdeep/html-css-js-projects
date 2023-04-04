@@ -10,8 +10,8 @@ body{
         to bottom,
         #eafbff 0%,
         #eafbff 50%,
-        #5290f9 50%,
-        #5290f9 100%
+        #7ad5f4 50%,
+        #7ad5f4 100%
     );
     font-family: 'Muli', sans-serif;
     display: flex;
@@ -41,6 +41,7 @@ nav.active{
 nav ul{
     display:flex;
     list-style-type: none;
+    font-weight: bold;
     padding:0;
     margin:0;
     width: 0;
@@ -84,7 +85,7 @@ icon:focus{
 }
 
 .icon .line{
-    background-color: #5290f9;
+    background-color: #7ad5f4;
     height: 2px;
     width: 20px;
     position:absolute;
