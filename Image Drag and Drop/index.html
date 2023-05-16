@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Image Dropbox</title>
+    <style>
+        #file-input{
+            background-color: red;
+        }
+
+        #image-dropbox {
+            display:block;
+            margin:5%;
+            width:auto;
+            height: max-content;
+            background-color: #252525;
+            color:#f099f7;
+            border: 4px dashed #f099f7;
+            border-radius: 5px;
+            padding: 20px;
+            text-align: center;
+        }
+
+        #image-dropbox:hover {
+            border-color: #252525;
+            background-color: #f099f7;
+            color:#252525;
+        }
+
+        #image-preview {
+            margin-top: 20px;
+            display: flex;
+            flex-wrap: wrap;
+        }
+
+        .image-preview-item {
+            margin: 10px;
+            width: 80px;
+            height: 80px;
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+        }
+
+        .image-preview-item {
+            display: inline-block;
+            width: 180px;
+            height:180px;
+            margin: 5px;
+            position: relative;
+        }
+
+        .image-preview-item .image-info {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background-color: rgba(0, 0, 0, 0.5);
+            color: white;
+            padding: 10px;
+        }
+
+        .image-preview-item .image-info .image-title {
+            font-size: 14px;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+
+        .image-preview-item .image-info .image-date {
+            font-size: 12px;
+        }
+
+        input[type="file"] {
+            display: none;
+  
+}
+    </style>
+</head>
+
+<body>
+    <div id="image-dropbox">
+        <h2>Drag and drop images here</h2>
+        <input type="file" id="file-input" placeholder="Drag and Drop Image" multiple>
+        <h4>Doudle click on image to delete.</h4>
+        <div id="image-preview"></div>
+    </div>
+
+    <script>
+        const dropbox = document.getElementById("image-dropbox");
+        const fileInput = document.getElementById("file-input");
+        const imagePreview = document.getElementById("image-preview");
+        const btn = document.getElementById("btn");
+
+        dropbox.addEventListener("dragover", function (event) {
+            event.preventDefault();
+            dropbox.classList.add("hover");
+        });
+
+        dropbox.addEventListener("dragleave", function (event) {
+            event.preventDefault();
+            dropbox.classList.remove("hover");
+        });
+
+        dropbox.addEventListener("drop", function (event) {
+            event.preventDefault();
+            dropbox.classList.remove("hover");
+            handleFiles(event.dataTransfer.files);
+        });
+
+        fileInput.addEventListener("change", function (event) {
+            handleFiles(event.target.files);
+        });
+        btn.addEventListener("click",function(event){
+            handleFiles(event.target.files);
+        })
+        function handleFiles(files) {
+            // Iterate over the array of files.
+            for (let i = 0; i < files.length; i++) {
+                // Create a new FileReader object for each file.
+                const file = files[i];
+                const reader = new FileReader();
+                // When the file has been read, create a new image element and set its src property to the file's URL.
+                reader.onload = function (event) {
+                    const image = document.createElement("div");
+                    image.classList.add("image-preview-item");
+                    image.style.backgroundImage = `url(${event.target.result})`;
+
+                    // Create a container element for the image's title and date.
+                    const info = document.createElement("div");
+                    info.classList.add("image-info");
+
+                    // Create a title element for the image.
+                    const title = document.createElement("div");
+                    title.classList.add("image-title");
+                    title.contentEditable = true;
+                    title.innerText = file.name;
+
+                    // Create a date element for the image.
+                    const date = document.createElement("div");
+                    date.classList.add("image-date");
+                    date.innerText = new Date().toLocaleDateString();
+
+                    // Add the title and date elements to the container element.
+                    info.appendChild(title);
+                    info.appendChild(date);
+
+                    // Add the image and container elements to the image preview container.
+                    image.appendChild(info);
+                    imagePreview.appendChild(image);
+
+                    // Add an event listener to the image element.
+                    image.addEventListener("dblclick", function () {
+                        // Remove the image from the image preview container.
+                        imagePreview.removeChild(image);
+                    });
+                };
+
+                // Read the file's contents into memory.
+                reader.readAsDataURL(file);
+            }
+        }
+
+
+    </script>
+</body>
+
+</html>
