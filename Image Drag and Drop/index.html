@@ -7,18 +7,20 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Image Dropbox</title>
     <style>
-        #file-input{
-            background-color: red;
+        body{
+            display:grid;
+            justify-content: center;
         }
-
         #image-dropbox {
             display:block;
+            align-content: center;
             margin:5%;
-            width:auto;
-            height: max-content;
-            background-color: #252525;
+            min-width: 50vw;
+            max-width: 100vw;
+            height: fit-content;
+            background-color: #2e2e2e;
             color:#f099f7;
-            border: 4px dashed #f099f7;
+            border: 6px dashed #f3acf8;
             border-radius: 5px;
             padding: 20px;
             text-align: center;
@@ -26,14 +28,14 @@
 
         #image-dropbox:hover {
             border-color: #252525;
-            background-color: #f099f7;
+            background-color: #f5bcf9;
             color:#252525;
         }
 
         #image-preview {
             margin-top: 20px;
             display: flex;
-            flex-wrap: wrap;
+            flex-wrap: wrap-reverse;
         }
 
         .image-preview-item {
@@ -47,8 +49,8 @@
 
         .image-preview-item {
             display: inline-block;
-            width: 180px;
-            height:180px;
+            width: 150px;
+            height:150px;
             margin: 5px;
             position: relative;
         }
